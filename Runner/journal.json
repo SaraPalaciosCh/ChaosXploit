@@ -1,0 +1,137 @@
+{
+  "chaoslib-version": "1.27.3",
+  "platform": "Linux-5.17.4-100.fc34.x86_64-x86_64-with-fedora-34-Thirty_Four",
+  "node": "fedora",
+  "experiment": {
+    "title": "Public buckets",
+    "description": "Finding collectable buckets",
+    "steady-state-hypothesis": {
+      "title": "All the buckets in the list are properly configured",
+      "probes": [
+        {
+          "type": "probe",
+          "name": "Are-Buckets-Collectable",
+          "tolerance": true,
+          "provider": {
+            "type": "python",
+            "module": "ChaosXploit.Runner.probes.probes_buckets",
+            "func": "find_changes",
+            "arguments": {
+              "input_file": "selected.json"
+            }
+          }
+        }
+      ]
+    },
+    "method": [
+      {
+        "type": "action",
+        "name": "Collecting-Objects",
+        "provider": {
+          "type": "python",
+          "module": "ChaosXploit.Runner.actions.actions_buckets",
+          "func": "initialize",
+          "arguments": {
+            "bucket_list": "selected.json",
+            "modes": [
+              "collect",
+              "ACLs",
+              "files"
+            ],
+            "output": "selected.json"
+          }
+        }
+      }
+    ],
+    "rollbacks": [],
+    "dry": null
+  },
+  "start": "2022-05-15T23:56:18.202072",
+  "status": "failed",
+  "deviated": true,
+  "steady_states": {
+    "before": {
+      "steady_state_met": true,
+      "probes": [
+        {
+          "activity": {
+            "type": "probe",
+            "name": "Are-Buckets-Collectable",
+            "tolerance": true,
+            "provider": {
+              "type": "python",
+              "module": "ChaosXploit.Runner.probes.probes_buckets",
+              "func": "find_changes",
+              "arguments": {
+                "input_file": "selected.json"
+              }
+            }
+          },
+          "output": true,
+          "status": "succeeded",
+          "start": "2022-05-15T23:56:18.203385",
+          "end": "2022-05-15T23:56:18.203964",
+          "duration": 0.000579,
+          "tolerance_met": true
+        }
+      ]
+    },
+    "after": {
+      "steady_state_met": false,
+      "probes": [
+        {
+          "activity": {
+            "type": "probe",
+            "name": "Are-Buckets-Collectable",
+            "tolerance": true,
+            "provider": {
+              "type": "python",
+              "module": "ChaosXploit.Runner.probes.probes_buckets",
+              "func": "find_changes",
+              "arguments": {
+                "input_file": "selected.json"
+              }
+            }
+          },
+          "output": false,
+          "status": "succeeded",
+          "start": "2022-05-15T23:56:40.065775",
+          "end": "2022-05-15T23:56:40.066324",
+          "duration": 0.000549,
+          "tolerance_met": false
+        }
+      ]
+    },
+    "during": []
+  },
+  "run": [
+    {
+      "activity": {
+        "type": "action",
+        "name": "Collecting-Objects",
+        "provider": {
+          "type": "python",
+          "module": "ChaosXploit.Runner.actions.actions_buckets",
+          "func": "initialize",
+          "arguments": {
+            "bucket_list": "selected.json",
+            "modes": [
+              "collect",
+              "ACLs",
+              "files"
+            ],
+            "output": "selected.json"
+          }
+        }
+      },
+      "output": null,
+      "status": "succeeded",
+      "start": "2022-05-15T23:56:18.204774",
+      "end": "2022-05-15T23:56:40.064719",
+      "duration": 21.859945
+    }
+  ],
+  "rollbacks": [],
+  "end": "2022-05-15T23:56:40.066811",
+  "duration": 21.88360619544983
+}

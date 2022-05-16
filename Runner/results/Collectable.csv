@@ -1,0 +1,10 @@
+creation;us-east-1;0.483245;False;AccessDenied
+epos;us-east-1;0.313274;False;AccessDenied
+dm;;0.548387;False;InvalidBucketName
+cata;us-east-1;0.203421;False;AllAccessDisabled
+c2c;us-east-1;0.240038;True;Open
+fedora;eu-north-1;0.411494;False;AccessDenied
+cassini;us-east-1;0.199483;False;AccessDenied
+faro;us-east-1;0.226203;False;AccessDenied
+dysk;eu-central-1;0.395576;False;AccessDenied
+crocus;eu-west-1;0.442517;True;Open

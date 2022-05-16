@@ -1,0 +1,64 @@
+// Generated from https://www.deciduous.app/
+digraph {
+    // base graph styling
+    rankdir="TB";
+    splines=true;
+    overlap=false;
+    nodesep="0.2";
+    ranksep="0.4";
+    label="Attack Tree for S3 Bucket scanning";
+    labelloc="t";
+    fontname="Arial";
+    node [ shape="plaintext" style="filled, rounded" fontname="Arial" margin=0.2 ]
+    edge [ fontname="Arial" fontsize=12 color="#2B303A" ]
+
+    // is reality a hologram?
+    reality [ label="Reality" fillcolor="#272727" fontcolor="#FFFFFF" ]
+
+    // facts
+    find [ label="Find public buckets" fillcolor="#D2D5DD" ]
+    checkConn [ label="Check Possible Connection" fillcolor="#D2D5DD" ]
+    // attacks
+    inspect [ label="Inspect collectable buckets" fillcolor="#ff92cc" ]
+    search [ label="Search ACL-Collectable buckets" fillcolor="#ff92cc" ]
+    brute_force [ label="BruteForce admin credentials" fillcolor="#ff92cc" ]
+    phishing [ label="Phishing" fillcolor="#ff92cc" ]
+    compromise_user_creds [ label="Compromise user credentials" fillcolor="#ff92cc" ]
+    compromise_AWS_creds [ label="Compromise AWS admin credentials" fillcolor="#ff92cc" ]
+    explot [ label="Exploit AWS ACS vulnerability" fillcolor="#ff92cc" ]
+    priv_escal [ label="Privilege Escalation" fillcolor="#ff92cc" ]
+    // mitigations
+    // goals
+    final_goal [ label="Extract or modify information" fillcolor="#5f00c2" fontcolor="#FFFFFF" ]
+
+    search -> final_goal
+    priv_escal -> final_goal
+    compromise_user_creds -> final_goal
+    compromise_AWS_creds -> final_goal
+    checkConn -> inspect [ xlabel="#yolosec" fontcolor="#010065" ]
+    inspect -> search
+    checkConn -> brute_force
+    checkConn -> phishing
+    brute_force -> compromise_user_creds
+    phishing -> compromise_user_creds [ style="dotted" color="#7692FF" penwidth=3 arrowsize=0.5 weight="0" ]
+    phishing -> compromise_AWS_creds
+    checkConn -> explot
+    explot -> priv_escal
+    reality -> find
+    find -> checkConn
+
+    // subgraphs to give proper layout
+    subgraph checkConn_order {
+        rank=same;
+        inspect;
+        brute_force;
+        phishing;
+        explot;
+    }
+    inspect -> brute_force -> phishing -> explot [ style="invis" ]
+
+    { rank=min; reality; }
+
+    { rank=max; final_goal; }
+
+}

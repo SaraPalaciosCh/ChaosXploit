@@ -1,0 +1,44 @@
+{
+    "title": "Public buckets",
+    "description": "Finding collectable buckets",
+    "steady-state-hypothesis": {
+        "title": "All the buckets in the list are properly configured",
+        "probes": [
+
+            {
+                "type": "probe",
+                "name": "Are-Buckets-Collectable",
+                "tolerance":true,
+                "provider": {
+                    "type": "python",
+                    "module": "ChaosXploit.Runner.probes.probes_buckets",
+                    "func": "find_changes",
+                    "arguments": {
+                        "input_file":"selected.json"
+                    }
+                }
+                
+            }
+        ]
+    },
+    "method": [
+        {
+            "type": "action",
+            "name": "Collecting-Objects",
+            "provider": {
+                "type": "python",
+                "module": "ChaosXploit.Runner.actions.actions_buckets",
+                "func": "initialize",
+                "arguments": {
+                    "bucket_list": "selected.json",
+                    "modes": ["collect", "ACLs", "files"],
+                    "output": "selected.json"
+                }
+                
+            }
+        }
+    ],
+    "rollbacks": [ 
+
+    ]
+}
