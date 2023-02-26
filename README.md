@@ -40,7 +40,7 @@ git clone https://github.com/SaraPalaciosCh/ChaosXploit.git
 Once cloned, install all requirements:
 ```sh
 cd ChaosXploit
-python3.7 -m pip install .r requirements.txt
+python3.7 -m pip install -r requirements.txt
 ```
 #### 1.1) Execution with ChaosToolkit
 After the installation, it is possible to perform automated Chaosxploit experiments. One such experiment currently available involves performing a scan on a list of AWS buckets to determine if they are well-configured or not. 
