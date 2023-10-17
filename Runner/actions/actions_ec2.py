@@ -104,9 +104,9 @@ def priv_scalation(keys):
 
 
 def create_instance():
-    #pendiente de revisar porque no me saca la ip :()
-    access = "AKIASQTZUHT6HDAAMZF3"
-    secret = "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"
+    #secretos del usuario vulnerable
+    access = ""
+    secret = ""
     sess =  get_session('Vulnerable', access, secret)
     client = sess.resource('ec2')
     cli = sess.client('ec2')
