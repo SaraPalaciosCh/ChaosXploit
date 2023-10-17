@@ -1,0 +1,7 @@
+#!/usr/bin/zsh
+echo "------- Executing experiment: Privelege Scalation ------"
+if [ "$1" != "" ]
+then
+
+    chaos run ec2_privsc.json
+fi
