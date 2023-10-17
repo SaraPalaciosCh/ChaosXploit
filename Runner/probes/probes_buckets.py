@@ -15,10 +15,10 @@ def find_changes(input_file):
         vals = buckets[bucket]
         if not vals["SS_Collectable"]:
             res = False
-            message = "Failed validation for Collectable Buckets"
+            message = "Failed validation"
         if not vals["SS_ACL_Collectable"]:
             res = False
-            message = "Failed validation for ACL Collectable Buckets"
+            message = "Failed validation"
 
     print(f"Is Steady State validated?: {res}")
     print(message)
